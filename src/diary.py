@@ -15,8 +15,12 @@ class Diary:
 
         self.__is_locked = False
 
+
+
     def is_locked(self):
         return self.__is_locked
+
+
 
     def unlock_diary(self, password):
         self.validate_password(password)
@@ -45,16 +49,56 @@ class Diary:
         self.__number_of_entries += 1
         self.__id += 1
 
+
+
+
     def get_number_of_entries(self):
         return self.__number_of_entries
 
+
+
     def delete_entry(self, id):
+        if self.__is_locked:
+            for entry in self.__entries:
+                if entry.get_id() == id:
+                    self.__entries.remove(entry)
+                    self.__number_of_entries -= 1
+                    return entry
+        self.validate_find_id(id)
+        return None
+
+
+
+    def find_entry(self, id):
+        if self.__is_locked:
+            for entry in self.__entries:
+                if entry.get_id() == id:
+                    return entry
+        self.validate_find_id(id)
+        return None
+
+
+
+    def validate_find_id(self, id):
         for entry in self.__entries:
-            if entry.get_id() == id:
-                self.__entries.remove(entry)
-                self.__number_of_entries -= 1
-            else:
-                raise ValueError("Id not Found")
+            if entry.get_id() != id:
+                raise ValueError("Entry not found")
+
+
+
+
+    def update_entry(self, id, title, body):
+        if self.__is_locked:
+            for entry in self.__entries:
+                if entry.get_id() == id:
+                    entry.set_title(title)
+                    entry.set_body(body)
+                    return entry
+
+        self.validate_find_id(id)
+        return None
+
+
 
 
 
