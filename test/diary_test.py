@@ -7,7 +7,7 @@ from src.diary import Diary
 class DiaryTest(unittest.TestCase):
 
     def setUp(self):
-        self.my_diary = Diary("7789")
+        self.my_diary = Diary("Odili","7789")
 
     def test_that_diary_is_locked(self):
         self.my_diary.lock_diary()

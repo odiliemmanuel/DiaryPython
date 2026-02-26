@@ -4,12 +4,17 @@ from src.entry import Entry
 
 
 class Diary:
-    def __init__(self, password):
+    def __init__(self, username, password):
+        self.__username = username
         self.__number_of_entries = 0
         self.__entries : list[Entry] = []
         self.__password = password
         self.__is_locked = False
         self.__id = 1
+
+    def get_username(self):
+        return self.__username
+
 
     def lock_diary(self):
 
